@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Search Book Record</title>
+    <link rel="stylesheet" href="{% static 'css/bookstyle.css' %} ">
+  </head>
+  <body>
+    <div id="header">
+      <h1>Book Record Management</h1>
+      <div id="nav">
+        <a href="http://localhost:8000/books/view">View Books</a>
+        <a href="http://localhost:8000/books/insert/">Insert New Book</a>
+        <a href="http://localhost:8000/books/search/">Search Book</a>
+        <a href="http://localhost:8000/books/userlogout/">Logout</a>
+      </div>
+    </div>
+    <div id="main">
+      <h2>Search Book Record</h2>
+      <form action="http://localhost:8000/books/searching/" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Search">
+      </form><br/>
+      {% if books %}
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Author</th>
+          <th>Publisher</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+          <td>{{book.title}}</td>
+          <td>{{book.price}}</td>
+          <td>{{book.author}}</td>
+          <td>{{book.publisher}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>
